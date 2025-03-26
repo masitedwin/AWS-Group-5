@@ -1,0 +1,11 @@
+{% if user.is_authenticated %}
+  <h1>Logout</h1>
+  <p>Are you sure you want to logout?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+{% else %}
+  <h1>Logout</h1>
+  <p>You are not logged in.</p>
+{% endif %}
