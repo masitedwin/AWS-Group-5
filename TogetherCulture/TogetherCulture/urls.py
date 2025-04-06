@@ -23,4 +23,6 @@ urlpatterns = [
     path('', include('home.urls')), #Include Home urls
     path('accounts/', include('accounts.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('Events/', include('Events.urls')),
+    path('Modules/', include('Modules.urls')),
 ]

@@ -3,15 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-</head>
-<body>
+    <title>Our Services - Together Culture</title>
     <h1>Services</h1>
+
     <nav>
         <a href="{% url 'home' %}">Home</a> 
         <a href="{% url 'company' %}">company</a> 
         <a href="{% url 'services' %}">services</a> 
         <a href="{% url 'contact' %}">contact</a>  
     </nav>
+
+  <style>
+    /* Basic Reset & Body Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    /* Header Styling (same as landing page) */
+    header {
+      background: linear-gradient(135deg, #ff6b6b, #f06595);
+      color: #fff;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .left-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .admin-login {
+      margin-bottom: 0.5rem;
+    }
+    .secondary-links {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .left-container a {
+      text-decoration: none;
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+    .left-container a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .title h1 {
+      font-size: 2.2rem;
+      margin: 0;
+      transition: transform 0.3s;
+    }
+    .title h1:hover {
+      transform: scale(1.05);
+    }
+    .member-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .member-links a {
+      text-decoration: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      margin: 0.25rem 0;
+      transition: background-color 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+    .member-links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #cce6ff;
+      border: 1px solid #cce6ff;
+    }
+    /* Banner Container: Side by Side Images with Hover Effect */
+    .banner-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
+      padding: 0 1rem;
+    }
+    .banner {
+      flex: 1 1 calc(50% - 1rem);
+      text-align: center;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .banner img {
+      width: 90%;
+      height: 250px;
+      border-radius: 20px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .banner img:hover {
+      transform: scale(1.05);
+    }
+    .banner-description {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    /* Services Text Container */
+    .services-text-container {
+      background: #beb315;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      padding: 1.2rem;
+      margin: 1rem;
+    }
+    .services-text-container h3 {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      color: #f06595;
+    }
+    .services-text-container p {
+      margin-bottom: 1rem;
+    }
+    /* Contact Section (Column Layout) */
+    .contact-section {
+      max-width: 500px;
+      margin: 2rem auto;
+      background: #00849b62;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .contact-section h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #f06595;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-form label {
+      font-weight: bold;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .contact-form button {
+      background: #f06595;
+      color: #fff;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact-form button:hover {
+      background: #ff6b6b;
+    }
+    /* Footer Styling with Social Media Links */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #f06595;
+      color: #fff;
+      width: 100%;
+    }
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .social-buttons {
+      margin-top: 0.5rem;
+    }
+    .social-buttons a {
+      margin: 0 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 50%;
+      background: #fff;
+      color: #f06595;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.3s, transform 0.3s, color 0.3s;
+      display: inline-block;
+    }
+    .social-buttons a:hover {
+      background: #f06595;
+      color: #fff;
+      transform: scale(1.1);
+    }
+    /* Back to Top Button Styling */
+    #back-to-top {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      font-size: 24px;
+      background: linear-gradient(135deg, #793333, #e2de03);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: opacity 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header (Same as landing page) -->
+  <header>
+    <div class="left-container">
+      <div class="home-btn">
+        <a href="new trial.html">Home</a>
+      </div>
+      <div class="secondary-links">
+        <a href="company.html">Company</a>
+      </div>
+    </div>
+    <div class="title">
+      <h1>OUR SERVICES</h1>
+    </div>
+    <div class="member-links">
+      <a href="#contact">Contact Us</a>
+    </div>
+  </header>
+
+  <!-- Banner Images Side by Side (Services-specific images) -->
+  <div class="banner-container">
+    <div class="banner">
+        <img src="togetherness.jpg" alt="Service Banner Image 2">
+        <p class="banner-description"><b>Togetherness</b></p>
+      </div>
+    <div class="banner">
+      <img src="services.jpg" alt="Service Banner Image 1">
+      <p class="banner-description"><b>Innovative Consulting</b></p>
+    </div>
+    <div class="banner">
+      <img src="services 1.jpg" alt="Service Banner Image 2">
+      <p class="banner-description"><b>Creative Design Solutions</b></p>
+    </div>
+    
+  </div>
+
+  <!-- Intro Container -->
+  <div class="container" style="text-align:center;">
+    <p>
+      Welcome to our Services page! Explore how Together Culture can help transform your business and community with innovative and creative solutions.
+    </p>
+  </div>
+
+  <!-- Services Text Container -->
+  <div class="services-text-container">
+    <h3><center>Our Services</center></h3>
+    <p>
+      At Together Culture, we offer a comprehensive range of services designed to drive growth and foster collaboration. Our consulting team works to identify opportunities, optimize processes, and overcome challenges tailored to your unique needs.
+    </p>
+    <p>
+      Our creative design solutions bring ideas to life, blending aesthetics with functionality to create compelling brand experiences. We collaborate closely with you to ensure that every service is personalized and impactful.
+    </p>
+    <p>
+      Whether you require strategic advice, innovative design, or a combination of both, our dedicated team is here to support your journey toward success.
+    </p>
+  </div>
+
+  <!-- Contact Section (Column Layout) -->
+  <section id="contact" class="container">
+    <div class="contact-section">
+      <h2>Contact Us</h2>
+      <form class="contact-form">
+        <div>
+          <label for="contact-name">Your Name</label>
+          <input type="text" id="contact-name" placeholder="Your Name" required>
+        </div>
+        <div>
+          <label for="contact-email">Your Email</label>
+          <input type="email" id="contact-email" placeholder="you@example.com" required>
+        </div>
+        <div>
+          <label for="contact-message">Your Message</label>
+          <textarea id="contact-message" placeholder="Your Message" rows="5" required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer with Social Buttons -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Together Culture. All rights reserved.</p>
+      <div class="social-buttons">
+        <a href="https://www.facebook.com/YourFacebookPage" target="_blank">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://twitter.com/dickyrono" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/dickyrono" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top">&#x2191;</button>
+
+  <!-- Font Awesome Script (for social icons) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script>
+    // Back to Top Button functionality
+    var backToTopBtn = document.getElementById("back-to-top");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+    backToTopBtn.addEventListener("click", function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
+

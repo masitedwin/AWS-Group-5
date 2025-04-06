@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Together Culture</title>
   <style>
+  
     /* Basic Reset & Body Styling */
     * {
       margin: 0;
@@ -220,28 +221,29 @@
       <div class="secondary-links">
         <a href="{% url 'home' %}">Home</a> 
         <a href="{% url 'company' %}">company</a> 
-        <a href="{% url 'services' %}">services</a> 
-        <a href="{% url 'contact' %}">contact</a>  
+        <a href="{% url 'services' %}">services</a>  
       </div>
     </div>
     <div class="title">
       <h1>Together Culture</h1>
     </div>
     <div class="member-links">
-      <a href="login.html">Members Login</a>
-      <a href="register.html">Members SignUp</a>
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'register' %}">SignUp</a>
       <a href="#contact">Contact Us</a>
     </div>
   </header>
 
   <!-- Banner Images Side by Side -->
   <div class="banner-container">
+  {% load static %}
+  
     <div class="banner">
-      <img src="community.png" alt="Banner Image">
+      <img src="{% static 'community.jpg' %}" alt="Banner Image">
       <p class="banner-description"><b>A picture of different people.</b></p>
     </div>
     <div class="banner">
-      <img src="people.jpg" alt="Banner Image">
+      <img src="{% static 'people.jpg' %}" alt="Banner Image">
       <p class="banner-description"><b>A picture of my Community.</b></p>
     </div>
   </div>
