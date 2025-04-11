@@ -1,0 +1,20 @@
+
+{% extends 'bases.html' %}
+{% block content %}
+<h1>Modules</h1>
+
+{% for Module in module_list %}
+<strong>{{Event}}</strong> 
+   <ul>
+        <li>{{ Module.name }}</li>
+        <li>Date:{{ Module.module_date }}</li>
+        <li>Manager:{{ Module.manager }}</li>
+        <li>Venue: {{ Module.venue }}</li>
+        <li>Description:{{ Module.description }}</li>
+        </ul>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
+

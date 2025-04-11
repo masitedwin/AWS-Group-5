@@ -1,0 +1,50 @@
+<!-- pricing/templates/pricing/pricing_page.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .pricing-plan {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+        }
+        .pricing-plan-header {
+            text-align: center;
+        }
+        .pricing-plan .price {
+            font-size: 2em;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'home' %}" class="btn btn-primary btn-block">Home</a>
+    <div class="container mt-5">
+        <h1 class="text-center">Our Pricing Plans</h1>
+        <div class="row">
+            {% for plan in plans %}
+            <div class="col-md-4">
+                <div class="pricing-plan">
+                    <div class="pricing-plan-header">
+                        <h3>{{ plan.name }}</h3>
+                        <p class="price">${{ plan.price }}</p>
+                    </div>
+                    <p>{{ plan.description }}</p>
+                    <ul>
+                        {% for feature in plan.features.splitlines %}
+                        <li>{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-block">Get Started</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
