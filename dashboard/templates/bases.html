@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Member Landing Page - Together Culture</title>
+  <style>
+    /* Basic Reset & Body Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    /* Header Styling */
+    header {
+      background: linear-gradient(135deg, #ff6b6b, #f06595);
+      color: #fff;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .left-container, .right-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .left-container a, .right-container a, .right-container button {
+      text-decoration: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      transition: background-color 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+    .left-container a:hover, .right-container a:hover, .right-container button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #cce6ff;
+    }
+    .title {
+      flex: 1;
+      text-align: center;
+    }
+    .title h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      transition: transform 0.3s;
+    }
+    .title h1:hover {
+      transform: scale(1.05);
+    }
+    /* Dropdown Menu Styling */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: #fff;
+      min-width: 150px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 4px;
+    }
+    .dropdown-content a {
+      color: #333;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      display: block;
+      transition: background 0.3s;
+    }
+    .dropdown-content a:hover {
+      background: #f1f1f1;
+    }
+    .show {
+      display: block;
+    }
+    /* Profile Section in Header */
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .profile-section img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+    .profile-section span {
+      font-size: 1rem;
+    }
+    /* Logout Button */
+    .logout-btn {
+      background: transparent;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .logout-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    /* Main Content Container */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    /* Events Section */
+    .events-section {
+      margin: 2rem 0;
+    }
+    .events-section h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #f06595;
+    }
+    .events-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .event-card {
+      flex: 1 1 calc(33.33% - 1rem);
+      max-width: calc(33.33% - 1rem);
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+    .event-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .event-card img:hover {
+      transform: scale(1.05);
+    }
+    .event-info {
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .event-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #f06595;
+    }
+    .event-info p {
+      font-size: 0.9rem;
+    }
+    /* Modules Section */
+    .modules-section, .registered-modules-section {
+      margin: 2rem 0;
+    }
+    .modules-section h2, .registered-modules-section h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #f06595;
+    }
+    .modules-grid, .registered-modules-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .module-card {
+      flex: 1 1 calc(33.33% - 1rem);
+      max-width: calc(33.33% - 1rem);
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      padding-bottom: 1rem;
+    }
+    .module-card:hover {
+      transform: translateY(-5px);
+    }
+    .module-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .module-card img:hover {
+      transform: scale(1.05);
+    }
+    .module-info {
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .module-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #f06595;
+    }
+    .module-info p {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .module-info button {
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      border: none;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .module-info button:hover {
+      background: #0056b3;
+    }
+    /* Profile Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .close-modal {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #aaa;
+      transition: color 0.3s;
+    }
+    .close-modal:hover {
+      color: #000;
+    }
+    .profile-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .profile-form label {
+      font-weight: bold;
+    }
+    .profile-form input {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+    }
+    .profile-form button {
+      background: #f06595;
+      color: #fff;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .profile-form button:hover {
+      background: #ff6b6b;
+    }
+    /* Footer Styling */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #f06595;
+      color: #fff;
+      width: 100%;
+    }
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .social-buttons {
+      margin-top: 0.5rem;
+    }
+    .social-buttons a {
+      margin: 0 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 50%;
+      background: #fff;
+      color: #f06595;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.3s, transform 0.3s, color 0.3s;
+      display: inline-block;
+    }
+    .social-buttons a:hover {
+      background: #f06595;
+      color: #fff;
+      transform: scale(1.1);
+    }
+    /* Back-to-Top Button Styling */
+    #back-to-top {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      background: linear-gradient(135deg, #793333, #e2de03);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: opacity 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="left-container">
+      <!-- Dropdown Menu -->
+      <div class="dropdown">
+        <button onclick="toggleDropdown()">Menu &#9662;</button>
+        <div id="myDropdown" class="dropdown-content">
+        <a href="{% url 'Events' %}">Events</a> 
+        <a href="{% url 'Modules' %}">Modules</a>
+        </div>
+      </div>
+    </div>
+    <div class="title">
+      <h1>Together Culture</h1>
+    </div>
+    <div class="right-container">
+        
+
+      <!-- Profile Section showing member's first and last name with profile pic -->
+      <div class="profile-section" onclick="openProfileModal()">
+        <span></span>
+      </div>
+      <a href="{% url 'update_user' %}">{{ user.username }}</a>
+        
+      <a href="{% url 'home' %}">Logout</a>
+    </div>
+  </header>
+  </div>
+
+
+{% block content %}
+<h1>Welcome {{ user.username }} </h1>
+
+<h2>You Have Registered Successful</h2>
+{% endblock %}
+
+  <!-- Footer with Social Media Buttons -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Together Culture. All rights reserved.</p>
+      <div class="social-buttons">
+        <a href="https://www.facebook.com/YourFacebookPage" target="_blank">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://twitter.com/dickyrono" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/dickyrono" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top">&#x2191;</button>
+
+  <!-- Font Awesome Script -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script>
+    // Logout function: redirect to login page
+    function logout() {
+      window.location.href = "login.html";
+    }
+    
+
+    // Profile Modal functions
+    function openProfileModal() {
+      document.getElementById("profileModal").style.display = "block";
+    }
+    function closeProfileModal() {
+      document.getElementById("profileModal").style.display = "none";
+    }
+    // Back-to-Top Button functionality
+    var backToTopBtn = document.getElementById("back-to-top");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+    backToTopBtn.addEventListener("click", function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    // Dropdown Menu functionality
+    function toggleDropdown() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdown button')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    };
+  </script>
+
+</body>
+</html>
