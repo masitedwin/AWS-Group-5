@@ -17,8 +17,8 @@
             width: 80%;
             margin: 50px auto;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
         .module {
@@ -87,25 +87,53 @@
     <header>
         <!-- Your existing header code... -->
     </header>
-{% extends 'base.html' %}
-{% block content %}
-<h1>Modules</h1>
 
-{% for Module in module_list %}
     <div class="container">
-         <div class="module"> 
-        <h3>{{ Module.name }}</h3>
-        <h3>Date:{{ Module.module_date }}</h3>
-        <h3>Manager:{{ Module.manager }}</h3>
-        <h3>Venue: {{ Module.venue }}</h3>
-        <h3>Description:{{ Module.description }}</h3>
-    
-             <button class="button" onclick="selectModule('{{ Module.name }}')">Select</button>
-         </div>
+        <!-- Module 1 -->
+        <div class="module">
+            <h3> Organizational Structure</h3>
+            <p>This Module focuses on task allocation and coordinations and how they meet Together Culture's Aims, goals and achievements .</p>
+            <button class="button" onclick="selectModule('Organizational Structure')">Select</button>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module">
+            <h3>Creative leadership</h3>
+            <p>Members enrolled to this module can learn about the different leadership styles and their effectiveness and limitations which would equip them with the required skills for leadership of the organization.</p>
+            <button class="button" onclick="selectModule('Creative leadership')">Select</button>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module">
+            <h3>Entrepreneurial skills Management</h3>
+            <p>This module covers the major skills needed for entrepreneurship. This includes Time management, Financial Management, problem solving, creativity and critical thinking.</p>
+            <button class="button" onclick="selectModule('Entrepreneurial skills Management')">Select</button>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="module">
+            <h3>Momentum</h3>
+            <p>This module allows for members to learn the importance of consistency in member contributions, welcoming new members to the Together Culture and member retention.</p>
+            <button class="button" onclick="selectModule('Momentum')">Select</button>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="module">
+            <h3>Resources and Facilities</h3>
+            <p>Members learn about the resources available at Together culture and how to effectively utilize them. This includes the Library with the different books and journals and member contributions to the trust fund for future projects.</p>
+            <button class="button" onclick="selectModule('Resources and Facilities')">Select</button>
+        </div>
     </div>
-  
-        
-     <script>
+
+    <!-- Booked Modules List -->
+    <div class="booked-modules-container">
+        <h2>Booked Modules:</h2>
+        <ul id="bookedModulesList" class="booked-modules-list">
+            <!-- Selected modules will be added here -->
+        </ul>
+    </div>
+
+    <script>
         const bookedModules = [];
 
         function selectModule(moduleName) {
@@ -120,13 +148,13 @@
         }
 
         function displayBookedModules() {
-            
+            // Get the booked modules list element
             const bookedModulesList = document.getElementById("bookedModulesList");
 
-            
+            // Clear the list before updating it
             bookedModulesList.innerHTML = '';
 
-            
+            // Add each booked module to the list
             bookedModules.forEach(module => {
                 const listItem = document.createElement("li");
                 listItem.textContent = module;
@@ -134,26 +162,6 @@
             });
         }
     </script>
-      {% endfor %}
-    <div class="booked-modules-container">
-     <h2>Booked Modules:</h2>
-        <ul id="bookedModulesList" class="booked-modules-list">
-            
-        </ul>
-    </div>
-
-{% endblock %}
-   
-     
-
-  
-
-   
-
-   
 
 </body>
 </html>
-
-
-

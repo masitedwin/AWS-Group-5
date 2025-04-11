@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.contrib.auth.models import User
 
 class Venue(models.Model):
@@ -22,9 +19,9 @@ class MyClubUser(models.Model):
 def __str__(self):
     return self.first_name + ' ' + self.last_name   
 
-class Module(models.Model):
-    name = models.CharField('Module Name' , max_length=120)
-    course_date = models.DateTimeField('Course Date')
+class Event(models.Model):
+    name = models.CharField('Event Name' , max_length=120)
+    event_date = models.DateTimeField('Event Date')
     venue = models.ForeignKey(Venue, blank=True, null=True, on_delete=models.CASCADE)    
     #venue = models.CharField(max_length=120)
     manager = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
@@ -37,7 +34,7 @@ def __str__(self):
 
 
 class Booking(models.Model):    
-    Module = models.ForeignKey(Module, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     customer = models.ForeignKey(MyClubUser, on_delete=models.CASCADE)
     booking_date = models.DateTimeField('Booking Date')
     guest_num = models.PositiveSmallIntegerField('Number of Guests')
@@ -45,11 +42,4 @@ class Booking(models.Model):
 
 def __str__(self):
     return self.event.name + ' ' + self.customer.first_name + ' ' + self.customer.last_name + ' ' + str(self.booking_date) + ' ' + str(self.guest_num) + ' ' + self.notes
-
-class benefits(models.Model):  
-    benefits = models.CharField('Benefits', max_length=120)
-      
-
-def __str__(self):
-    return self.benefits
 # Create your models here.
